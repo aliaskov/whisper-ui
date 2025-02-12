@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5510:5510"
+    environment:
+      - FLASK_ENV=production
+      - PORT=5510
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
